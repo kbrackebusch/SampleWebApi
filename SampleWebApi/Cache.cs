@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace SampleWebApi
 {
-    public class Cache
+    public class Cache : ICache
     {
-        private ConcurrentDictionary<(string a, string b), LinkedList> cache = new ConcurrentDictionary<(string a, string b), LinkedList>();
+        private ConcurrentDictionary<(string a, string b), SimpleLinkedList> cache = new ConcurrentDictionary<(string a, string b), SimpleLinkedList>();
 
-        public bool TryGetValue(string listA, string listB, out LinkedList mergedList)
+        public bool TryGetValue(string listA, string listB, out SimpleLinkedList mergedList)
         {
             return cache.TryGetValue((listA, listB), out mergedList);
         }
 
-        public void CacheQuery(string listA, string listB, LinkedList mergedList)
+        public void CacheQuery(string listA, string listB, SimpleLinkedList mergedList)
         {
             // ok for any thread to succed here.  Since both should have the same value
             cache[(listA, listB)] = mergedList;
