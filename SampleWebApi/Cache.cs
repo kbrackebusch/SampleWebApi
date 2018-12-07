@@ -17,7 +17,7 @@ namespace SampleWebApi
 
         public void CacheQuery(string listA, string listB, SimpleLinkedList mergedList)
         {
-            // ok for any thread to succed here.  Since both should have the same value
+            // ok for any thread to succeed here.  Since both should have the same value
             cache[(listA, listB)] = mergedList;
         }
     }
